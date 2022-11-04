@@ -35,10 +35,10 @@ public class Recetas extends JPanel {
 
 	// The image URL - change to where your image file is located!
 
-	String imageURL1 = "receta1.png";
-	String imageURL2 = "receta2.png";
-	String imageURL3 = "receta3.png";
-	String imageURL0 = "prueba2.png";
+	String imageURL1 = "Recursos/recetas/receta1.png";
+	String imageURL2 = "Recursos/recetas/receta2.png";
+	String imageURL3 = "Recursos/recetas/receta3.png";
+	String imageURL0 = "Recursos/mapas/prueba2.png";
 
 	Image sourceImage1 = Toolkit.getDefaultToolkit().getImage(imageURL1);
 	Image sourceImage2 = Toolkit.getDefaultToolkit().getImage(imageURL2);

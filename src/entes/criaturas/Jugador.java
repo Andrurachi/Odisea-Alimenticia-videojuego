@@ -11,6 +11,10 @@ public class Jugador extends Criatura {
 
 	private int animacion;
 
+	private boolean receta_abierta = false;
+
+	private int num_receta;
+
 	public Jugador(Mapa mapa, Teclado teclado, Sprite sprite) {
 		this.mapa = mapa;
 		this.teclado = teclado;
@@ -99,43 +103,29 @@ public class Jugador extends Criatura {
 
 	public void mostrar(Pantalla pantalla) {
 		pantalla.mostrarJugador(x, y, this);
+		interactua();
 	}
 
 	public void interactua() {
-		if (teclado.interactua) {
-			if (obtenerPosicionX() < 157) {
-				if (obtenerPosicionX() > 100) {
-					if (obtenerPosicionY() > 190) {
-						if (obtenerPosicionY() < 248) {
-							System.out.print('a');
-						}
-					}
-				}
-			}
+		if (obtenerPosicionX() < 157 && obtenerPosicionX() > 100 && obtenerPosicionY() > 190
+				&& obtenerPosicionY() < 248) {
+			num_receta = 1;
+		} else if (obtenerPosicionX() < 705 && obtenerPosicionX() > 643 && obtenerPosicionY() > 505
+				&& obtenerPosicionY() < 567) {
+			num_receta = 2;
+		} else if (obtenerPosicionX() < 159 && obtenerPosicionX() > 104 && obtenerPosicionY() > 419
+				&& obtenerPosicionY() < 479) {
+			num_receta = 3;
+		} else if (obtenerPosicionX() < 395 && obtenerPosicionX() > 342 && obtenerPosicionY() > 227
+				&& obtenerPosicionY() < 231) {
+			num_receta = 4;
+		} else {
+			num_receta = 0;
 		}
+	}
 
-		if (teclado.interactua) {
-			if (obtenerPosicionX() < 705) {
-				if (obtenerPosicionX() > 643) {
-					if (obtenerPosicionY() > 505) {
-						if (obtenerPosicionY() < 567) {
-							System.out.print('b');
-						}
-					}
-				}
-			}
-		}
-		if (teclado.interactua) {
-			if (obtenerPosicionX() < 159) {
-				if (obtenerPosicionX() > 104) {
-					if (obtenerPosicionY() > 419) {
-						if (obtenerPosicionY() < 479) {
-							System.out.print('c');
-						}
-					}
-				}
-			}
-		}
+	public int obtenerReceta() {
+		return num_receta;
 	}
 
 	public void direccionJugador(char direccion) {

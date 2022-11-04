@@ -16,6 +16,7 @@ import control.Teclado;
 import entes.criaturas.Jugador;
 import graficos.Pantalla;
 import graficos.Sprite;
+import interfazusuario.Recetas;
 import mapa.Mapa;
 import mapa.MapaCargado;
 import mapa.cuadro.Cuadro;
@@ -29,13 +30,15 @@ public class Juego extends Canvas implements Runnable {
 
 	private static volatile boolean enFuncionamiento = false;
 
-	private static final String NOMBRE = "Juego";
+	private static final String NOMBRE = "La Odisea Alimenticia";
 
 	private static int aps = 0;
 	private static int fps = 0;
 
 	private static int x = 0;
 	private static int y = 0;
+
+	private boolean receta_abierta = false;
 
 	private static JFrame ventana;
 	private static Thread thread;
@@ -47,6 +50,7 @@ public class Juego extends Canvas implements Runnable {
 	private static BufferedImage imagen = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
 	private static int[] pixeles = ((DataBufferInt) imagen.getRaster().getDataBuffer()).getData();
 	private static final ImageIcon icono = new ImageIcon(Juego.class.getResource("/icono/icono.png"));
+	private static Recetas recetas = new Recetas(teclado);
 
 	private Juego() {
 
@@ -62,6 +66,7 @@ public class Juego extends Canvas implements Runnable {
 		mapa = new MapaCargado("/mapas/nuevominimapa.png");
 		jugador = new Jugador(mapa, teclado, Sprite.FRENTE, 370, 245);
 		persona = new Cuadro(Sprite.PARADO_UNO, 367, 245);
+		recetas = new Recetas(teclado);
 
 		ventana = new JFrame(NOMBRE);// Nombre para la ventana
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// Cierra la ventana
@@ -122,7 +127,7 @@ public class Juego extends Canvas implements Runnable {
 			return;
 		}
 
-//		pantalla.limpiar();
+		pantalla.limpiar();
 		mapa.mostrar(jugador.obtenerPosicionX() - pantalla.obtenAncho() / 2 + jugador.obtenSprite().obtenLado() / 2,
 				jugador.obtenerPosicionY() - pantalla.obtenAlto() / 2 + jugador.obtenSprite().obtenLado() / 2,
 				pantalla);// Mapa
@@ -131,13 +136,8 @@ public class Juego extends Canvas implements Runnable {
 
 		System.arraycopy(pantalla.pixeles, 0, pixeles, 0, pixeles.length);
 
-//  for (int i = 0; i < pixeles.length; i++) {
-
-//   pixeles[i] = pantalla.pixeles[i];
-
-//  }
-
 		Graphics g = estrategia.getDrawGraphics();
+		recetas.dibujarReceta(g, jugador.obtenerReceta());
 		g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
 		g.setColor(Color.blue);
 		g.drawString("X: " + jugador.obtenerPosicionX(), 10, 50);

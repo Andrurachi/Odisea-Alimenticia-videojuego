@@ -116,6 +116,10 @@ public class Sprite {
 	public static final Sprite ARBOL_BOLITA_ESQUINA_IZQUIERDA_ABAJO = new Sprite(32, 9, 8, HojaSprites.granja);
 	public static final Sprite ARBOL_BOLITA_ESQUINA_DERECHA_ABAJO = new Sprite(32, 9, 9, HojaSprites.granja);
 
+	// recetas
+	public static final Sprite receta1 = new Sprite(32, 9, 9, HojaSprites.granja);
+	// fin recetas
+
 	// fin de la coleccion
 
 	public Sprite(final int lado, final int columna, final int fila, final HojaSprites hoja) {
